@@ -10,7 +10,7 @@ EXPOSE 8080
 
 RUN mkdir /app
 
-COPY  --from=build /home/gradle/src/build/libs/*.jar /app/spring-music.jar
+COPY  --from=build /home/gradle/src/build/libs/spring-music-1.0.jar /app/spring-music.jar
 
 ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-DJava.security.egd=file:/dev.urandom", "-jar","/app/spring-music.jar"]
 
