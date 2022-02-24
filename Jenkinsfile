@@ -11,6 +11,10 @@ pipeline {
                 git branch: 'main', credentialsId: '10af89be-b6aa-4e52-9a62-56bda0524dee', url: 'https://github.com/vaisyarajuraju/spring-music.git'
             }           
         }
+        stage('Sonarqube Analysis'){
+            def scannerHome = tool 'sonarqube';
+            withSonarQubeEnv('sonarqube')
+        }
         stage('Building our image') {
             steps{
                 script {
