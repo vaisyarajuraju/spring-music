@@ -5,21 +5,14 @@ pipeline {
         dockerImage = ''
     }
     agent any
-
-    node {
-        stage('SCM') {
-            checkout scm
-        }
-        stage('SonarQube Analysis') {
-            withSonarQubeEnv() {
-            sh "./gradlew sonarqube"
-            }
-        }
-    }
     stages {
         stage('Cloning our Git') {
             steps {
                 git branch: 'main', credentialsId: '10af89be-b6aa-4e52-9a62-56bda0524dee', url: 'https://github.com/vaisyarajuraju/spring-music.git'
+                
+                 withSonarQubeEnv() {
+                    sh "./gradlew sonarqube"
+                 }
             }           
         }
         stage('Building our image') {
