@@ -11,9 +11,6 @@ pipeline {
                 git branch: 'main', credentialsId: '10af89be-b6aa-4e52-9a62-56bda0524dee', url: 'https://github.com/vaisyarajuraju/spring-music.git'
             }           
         }
-        stage('SCM') {
-           checkout scm
-        }
         stage('SonarQube Analysis') {
             withSonarQubeEnv() {
                 sh "./gradlew sonarqube"
