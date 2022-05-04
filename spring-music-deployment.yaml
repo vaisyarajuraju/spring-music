@@ -1,0 +1,48 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: spring-music
+  namespace: citi-poc
+  labels:
+    app: spring-music
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: spring-music
+  template:
+    metadata:
+      labels:
+        app: spring-music
+    spec:
+      volumes:
+        - name: spring-music-1
+          emptyDir: {}
+      containers:
+        - name: spring-music
+          image: >-
+            harbor.dell.local/library/spring-music@sha256:db9bb94e6bb4e22e9c150572a415965db21205fe767ac4941c25e91af9f6e6b9
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: spring-music-1
+              mountPath: /tmp
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+      imagePullSecrets: []
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+  paused: false
