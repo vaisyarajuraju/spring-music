@@ -4,6 +4,7 @@ pipeline {
         registryCredential = 'harbor'
         dockerImage = ''
     }
+   /*
     agent {
         kubernetes {
             containerTemplate {
@@ -14,6 +15,7 @@ pipeline {
             }
         }
     }
+    */
     stages {
         stage('Cloning our Git') {
             steps {
@@ -33,6 +35,7 @@ pipeline {
         stage('Scan'){
             steps{
                 sh 'trivy spring-music:$BUILD_NUMBER'
+             //   sh 'trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL spring-music:$BUILD_NUMBER'
             }
         }
         stage('Deploy our image') {
