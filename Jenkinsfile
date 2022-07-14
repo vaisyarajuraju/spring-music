@@ -36,7 +36,7 @@ pipeline {
         
         stage('Scan'){
             steps{
-               sh 'trivy '+ docker.build registry + "/spring-music:$BUILD_NUMBER"
+               sh 'trivy harbor.dell.local/library/spring-music:60"
              //   sh 'trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL spring-music:$BUILD_NUMBER'
             }
         }
