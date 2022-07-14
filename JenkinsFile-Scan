@@ -1,14 +1,6 @@
 pipeline {
-    agent {
-        kubernetes {
-            containerTemplate {
-                 name 'trivy'
-                 image 'aquasec/trivy:0.21.1'
-                 command 'sleep'
-                 args 'infinity'
-            }
-        }
-    }
+    agent { label 'linux' }
+    
     stages {
         stage('Scan'){
             steps{
