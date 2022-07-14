@@ -4,7 +4,16 @@ pipeline {
         registryCredential = 'harbor'
         dockerImage = ''
     }
-    agent any
+    agent {
+        kubernetes {
+            containerTemplate {
+                 name 'trivy'
+                 image 'aquasec/trivy:0.21.1'
+                 command 'sleep'
+                 args 'infinity'
+            }
+        }
+    }
     stages {
         stage('Cloning our Git') {
             steps {
