@@ -21,6 +21,11 @@ pipeline {
                 }
             }
         }
+        stage('Scan'){
+            steps{
+                sh 'trivy spring-music:$BUILD_NUMBER'
+            }
+        }
         stage('Deploy our image') {
             steps{
                 script {
