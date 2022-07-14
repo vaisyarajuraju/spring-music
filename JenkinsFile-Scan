@@ -1,0 +1,20 @@
+pipeline {
+    agent {
+        kubernetes {
+            containerTemplate {
+                 name 'trivy'
+                 image 'aquasec/trivy:0.21.1'
+                 command 'sleep'
+                 args 'infinity'
+            }
+        }
+    }
+    stages {
+        stage('Scan'){
+            steps{
+               sh 'trivy spring-music:$BUILD_NUMBER'
+             //   sh 'trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL spring-music:$BUILD_NUMBER'
+            }
+        }
+    }
+}
