@@ -1,0 +1,419 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      attachment_id: 25cd9391-a4f9-4970-a6a0-e692acba1c0f
+      k8s.v1.cni.cncf.io/network-status: |-
+        [{
+            "name": "nsx-cni",
+            "interface": "eth0",
+            "ips": [
+                "10.4.14.2"
+            ],
+            "mac": "04:50:56:00:30:61",
+            "default": true,
+            "dns": {}
+        }]
+      k8s.v1.cni.cncf.io/networks-status: |-
+        [{
+            "name": "nsx-cni",
+            "interface": "eth0",
+            "ips": [
+                "10.4.14.2"
+            ],
+            "mac": "04:50:56:00:30:61",
+            "default": true,
+            "dns": {}
+        }]
+      mac: 04:50:56:00:30:61
+      openshift.io/generated-by: OpenShiftWebConsole
+      openshift.io/scc: restricted
+      vlan: "8"
+    creationTimestamp: "2022-07-13T16:00:06Z"
+    generateName: spring-music-649d889b89-
+    labels:
+      app: spring-music
+      deploymentconfig: spring-music
+      pod-template-hash: 649d889b89
+    name: spring-music-649d889b89-m79ct
+    namespace: citi-poc
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: spring-music-649d889b89
+      uid: e6d80617-c1fe-4d50-b187-4f54108e73d9
+    resourceVersion: "508163"
+    uid: 76bfe441-920f-4713-b7ff-929e75a57ffd
+  spec:
+    containers:
+    - image: harbor.dell.local/library/spring-music@sha256:9207fb3b80e6d05a97c534ac1264545c5bec68275ecbfe932ccc13c44e3b7ff9
+      imagePullPolicy: IfNotPresent
+      name: spring-music
+      ports:
+      - containerPort: 8080
+        protocol: TCP
+      resources: {}
+      securityContext:
+        capabilities:
+          drop:
+          - KILL
+          - MKNOD
+          - SETGID
+          - SETUID
+        runAsUser: 1000640000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-vg2cm
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    imagePullSecrets:
+    - name: default-dockercfg-bjldq
+    nodeName: az2-zwrzd-worker-m2k7w
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      fsGroup: 1000640000
+      seLinuxOptions:
+        level: s0:c25,c20
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-vg2cm
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+        - configMap:
+            items:
+            - key: service-ca.crt
+              path: service-ca.crt
+            name: openshift-service-ca.crt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2022-07-13T16:00:41Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2022-07-13T16:01:19Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2022-07-13T16:01:19Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2022-07-13T16:00:06Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: cri-o://71e029f4b40beeb499477ae89a20a7ed4af321f99ecedc14d80184a8570c2f1e
+      image: harbor.dell.local/library/spring-music@sha256:9207fb3b80e6d05a97c534ac1264545c5bec68275ecbfe932ccc13c44e3b7ff9
+      imageID: harbor.dell.local/library/spring-music@sha256:9207fb3b80e6d05a97c534ac1264545c5bec68275ecbfe932ccc13c44e3b7ff9
+      lastState: {}
+      name: spring-music
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2022-07-13T16:01:19Z"
+    hostIP: 172.16.170.148
+    phase: Running
+    podIP: 10.4.14.2
+    podIPs:
+    - ip: 10.4.14.2
+    qosClass: BestEffort
+    startTime: "2022-07-13T16:00:41Z"
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftWebConsole
+    creationTimestamp: "2022-07-13T16:00:02Z"
+    labels:
+      app: spring-music
+      app.kubernetes.io/component: spring-music
+      app.kubernetes.io/instance: spring-music
+      app.kubernetes.io/name: spring-music
+      app.kubernetes.io/part-of: spring-music-app
+      app.openshift.io/runtime-version: "38"
+    name: spring-music
+    namespace: citi-poc
+    resourceVersion: "507867"
+    uid: 370140d5-1d5c-4c2c-885c-e9144275d044
+  spec:
+    clusterIP: 172.30.117.58
+    clusterIPs:
+    - 172.30.117.58
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: spring-music
+      deploymentconfig: spring-music
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      alpha.image.policy.openshift.io/resolve-names: '*'
+      deployment.kubernetes.io/revision: "1"
+      image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"spring-music:38","namespace":"citi-poc"},"fieldPath":"spec.template.spec.containers[?(@.name==\"spring-music\")].image","pause":"false"}]'
+      openshift.io/generated-by: OpenShiftWebConsole
+    creationTimestamp: "2022-07-13T16:00:03Z"
+    generation: 1
+    labels:
+      app: spring-music
+      app.kubernetes.io/component: spring-music
+      app.kubernetes.io/instance: spring-music
+      app.kubernetes.io/name: spring-music
+      app.kubernetes.io/part-of: spring-music-app
+      app.openshift.io/runtime-namespace: citi-poc
+    name: spring-music
+    namespace: citi-poc
+    resourceVersion: "508168"
+    uid: 4327e793-fb61-440b-99e9-1232b5a42af9
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: spring-music
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          openshift.io/generated-by: OpenShiftWebConsole
+        creationTimestamp: null
+        labels:
+          app: spring-music
+          deploymentconfig: spring-music
+      spec:
+        containers:
+        - image: harbor.dell.local/library/spring-music@sha256:9207fb3b80e6d05a97c534ac1264545c5bec68275ecbfe932ccc13c44e3b7ff9
+          imagePullPolicy: IfNotPresent
+          name: spring-music
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2022-07-13T16:00:42Z"
+      lastUpdateTime: "2022-07-13T16:00:42Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2022-07-13T16:00:03Z"
+      lastUpdateTime: "2022-07-13T16:00:42Z"
+      message: ReplicaSet "spring-music-649d889b89" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      alpha.image.policy.openshift.io/resolve-names: '*'
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+      image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"spring-music:38","namespace":"citi-poc"},"fieldPath":"spec.template.spec.containers[?(@.name==\"spring-music\")].image","pause":"false"}]'
+      openshift.io/generated-by: OpenShiftWebConsole
+    creationTimestamp: "2022-07-13T16:00:06Z"
+    generation: 1
+    labels:
+      app: spring-music
+      deploymentconfig: spring-music
+      pod-template-hash: 649d889b89
+    name: spring-music-649d889b89
+    namespace: citi-poc
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: spring-music
+      uid: 4327e793-fb61-440b-99e9-1232b5a42af9
+    resourceVersion: "508164"
+    uid: e6d80617-c1fe-4d50-b187-4f54108e73d9
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: spring-music
+        pod-template-hash: 649d889b89
+    template:
+      metadata:
+        annotations:
+          openshift.io/generated-by: OpenShiftWebConsole
+        creationTimestamp: null
+        labels:
+          app: spring-music
+          deploymentconfig: spring-music
+          pod-template-hash: 649d889b89
+      spec:
+        containers:
+        - image: harbor.dell.local/library/spring-music@sha256:9207fb3b80e6d05a97c534ac1264545c5bec68275ecbfe932ccc13c44e3b7ff9
+          imagePullPolicy: IfNotPresent
+          name: spring-music
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/image.dockerRepositoryCheck: "2022-07-13T16:00:02Z"
+    creationTimestamp: "2022-07-13T16:00:04Z"
+    generation: 2
+    labels:
+      app: spring-music
+      app.kubernetes.io/component: spring-music
+      app.kubernetes.io/instance: spring-music
+      app.kubernetes.io/name: spring-music
+      app.kubernetes.io/part-of: spring-music-app
+    name: spring-music
+    namespace: citi-poc
+    resourceVersion: "507863"
+    uid: ec496768-dcc5-4688-86df-c7078c94f2f6
+  spec:
+    lookupPolicy:
+      local: false
+    tags:
+    - annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+        openshift.io/imported-from: harbor.dell.local/library/spring-music:38
+      from:
+        kind: DockerImage
+        name: harbor.dell.local/library/spring-music:38
+      generation: 2
+      importPolicy:
+        insecure: true
+      name: "38"
+      referencePolicy:
+        type: Local
+  status:
+    dockerImageRepository: ""
+    tags:
+    - items:
+      - created: "2022-07-13T16:00:02Z"
+        dockerImageReference: harbor.dell.local/library/spring-music@sha256:9207fb3b80e6d05a97c534ac1264545c5bec68275ecbfe932ccc13c44e3b7ff9
+        generation: 2
+        image: sha256:9207fb3b80e6d05a97c534ac1264545c5bec68275ecbfe932ccc13c44e3b7ff9
+      tag: "38"
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      ncp/internal_ip_for_policy: 100.64.32.9
+      ncp/router_ip: 172.16.172.1
+      openshift.io/host.generated: "true"
+    creationTimestamp: "2022-07-13T16:00:05Z"
+    labels:
+      app: spring-music
+      app.kubernetes.io/component: spring-music
+      app.kubernetes.io/instance: spring-music
+      app.kubernetes.io/name: spring-music
+      app.kubernetes.io/part-of: spring-music-app
+      app.openshift.io/runtime-version: "38"
+    name: spring-music
+    namespace: citi-poc
+    resourceVersion: "507897"
+    uid: 64584223-9c62-4b44-8a0d-4b12e973a8c2
+  spec:
+    host: spring-music-citi-poc.apps.az2.openshift.dell.local
+    port:
+      targetPort: 8080-tcp
+    to:
+      kind: Service
+      name: spring-music
+      weight: 100
+    wildcardPolicy: None
+  status:
+    ingress:
+    - conditions:
+      - lastTransitionTime: "2022-07-13T16:00:40Z"
+        status: "True"
+        type: Admitted
+      host: spring-music-citi-poc.apps.az2.openshift.dell.local
+      routerCanonicalHostname: router-default.apps.az2.openshift.dell.local
+      routerName: default
+      wildcardPolicy: None
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
