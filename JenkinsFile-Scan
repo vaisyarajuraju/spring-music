@@ -1,10 +1,9 @@
 pipeline {
-    agent { label 'linux' }
-    
+    agents any
     stages {
         stage('Scan'){
             steps{
-               sh 'trivy spring-music:$BUILD_NUMBER'
+               sh 'trivy harbor.dell.local/library/spring-music@sha256:3550c1dac740ad03409efda7ad70d60259c612892e1fdf444558442886e5d20a'
              //   sh 'trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL spring-music:$BUILD_NUMBER'
             }
         }
