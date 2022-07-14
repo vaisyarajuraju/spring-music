@@ -4,6 +4,7 @@ pipeline {
         registryCredential = 'harbor'
         dockerImage = ''
     }
+    agent any
    /*
     agent {
         kubernetes {
