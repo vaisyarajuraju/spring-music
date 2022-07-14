@@ -41,7 +41,7 @@ pipeline {
             }
         }
         */
-        stage('Deploy our image') {
+        stage('Push to Harbor') {
             steps{
                 script {
                     docker.withRegistry( 'https://harbor.dell.local/library', 'harbor' ) {
@@ -50,6 +50,14 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to Openshift') {
+            steps{
+                script {
+                   kubernetesDeploy(configs: "deploymentservice.yaml", kubeconfigId: "kubernetes")
+                    }
+                }
+            }
+        }        
         stage('Cleaning up') {
             steps{
                 sh "docker rmi $registry/spring-music:$BUILD_NUMBER"
