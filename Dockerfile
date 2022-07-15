@@ -9,7 +9,7 @@ COPY --from=aquasec/trivy:latest /usr/local/bin/trivy /usr/local/bin/trivy
 RUN trivy rootfs --no-progress /
 
 FROM build AS zegl
-COPY --from=zegl/kube-score:latest /usr/local/bin/kube-score /usr/local/bin/kube-score
+run -v $(pwd):/project zegl/kube-score:latest score deploymentservice.yaml
 
 FROM openjdk:11
 EXPOSE 8080
