@@ -1,4 +1,9 @@
 pipeline {
+   environment {
+        registry = "harbor.dell.local/library"
+        registryCredential = 'harbor'
+        dockerImage = ''
+    }
     agent any
     stages {
         stage('Scan'){
