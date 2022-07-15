@@ -22,7 +22,7 @@ pipeline {
         }
    stage('Validate'){
             steps{
-               sh './kube-score score deploymentservice.yaml'
+               sh 'kube-score score deploymentservice.yaml'
             
             }
         }        
