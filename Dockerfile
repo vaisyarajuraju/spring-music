@@ -8,6 +8,8 @@ FROM build AS vulnscan
 COPY --from=aquasec/trivy:latest /usr/local/bin/trivy /usr/local/bin/trivy
 RUN trivy rootfs --no-progress /
 
+FROM build AS zegl
+COPY --from=zegl/kube-score:latest /usr/local/bin/kube-score /usr/local/bin/kube-score
 
 FROM openjdk:11
 EXPOSE 8080
