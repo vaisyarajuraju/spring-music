@@ -6,11 +6,25 @@ pipeline {
     }
     agent any
     stages {
+    stage('Cloning our Git') {
+            steps {
+                git branch: 'main', credentialsId: '10af89be-b6aa-4e52-9a62-56bda0524dee', url: 'https://github.com/vaisyarajuraju/spring-music.git'
+              
+                // sh "./gradlew sonarqube"
+                 
+            }           
+        }
         stage('Scan'){
             steps{
                sh 'trivy image harbor.dell.local/library/spring-music@sha256:3550c1dac740ad03409efda7ad70d60259c612892e1fdf444558442886e5d20a'
              //   sh 'trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL spring-music:$BUILD_NUMBER'
             }
         }
+   stage('Validate'){
+            steps{
+               sh './kube-score score deploymentservice.yaml'
+            
+            }
+        }        
     }
 }
