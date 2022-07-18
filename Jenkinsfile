@@ -44,7 +44,7 @@ pipeline {
         }        
         stage('Scan'){
             steps{
-               sh 'trivy image ' + "/spring-music:$BUILD_NUMBER"
+               sh 'trivy image '+registry + "/spring-music:$BUILD_NUMBER"
              //   sh 'trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL spring-music:$BUILD_NUMBER'
             }
         }
