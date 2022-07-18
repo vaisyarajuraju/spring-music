@@ -41,6 +41,13 @@ pipeline {
             }
         }
         
+        stage('validate')
+        {
+            steps{
+                sh '/home/admin/citi-poc/kube-score score openshift-export.yaml'
+            }
+        }
+        
         stage('Push to Harbor') {
             steps{
                 script {
