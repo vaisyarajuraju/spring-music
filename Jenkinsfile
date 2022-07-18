@@ -33,7 +33,15 @@ pipeline {
                 }
             }
         }
-        
+        stage('Push to Harbor') {
+            steps{
+                script {
+                    docker.withRegistry( 'https://harbor.dell.local/library', 'harbor' ) {
+                    dockerImage.push()
+                    }
+                }
+            }
+        }        
         stage('Scan'){
             steps{
                sh 'trivy image ' + "/spring-music:$BUILD_NUMBER"
@@ -48,15 +56,7 @@ pipeline {
             }
         }
         
-        stage('Push to Harbor') {
-            steps{
-                script {
-                    docker.withRegistry( 'https://harbor.dell.local/library', 'harbor' ) {
-                    dockerImage.push()
-                    }
-                }
-            }
-        }
+
         stage('Deploy to Openshift') {
             steps{
                 script {
